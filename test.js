@@ -6,7 +6,7 @@ var AWS = require('aws-sdk');
 
 var app = express();
 
-var db = new AWS.DynamoDB();
+var db = new AWS.DynamoDB({'region': 'eu-west-3'});
 
 
 
