@@ -4,9 +4,10 @@ var url = require('url');
 /* this function is used for get user */
 module.exports = {
     getUser : function (db, url, req, res){
+    console.log("request received into getUser function.");
     var params = querystring.parse(url.parse(req.url).query);
-    console.log(params['username']);
-    console.log(params['password']);
+    console.log("username: " + params['username']);
+    console.log("password: " + params['password']);
   
     if ('username' in params && 'password' in params) {
       var paramsdb = {
@@ -22,6 +23,7 @@ module.exports = {
           console.log(err, err.stack);
         }// an error occurred
         else {
+          console.log("datas received from database: ");
           console.log(data);
           res.setHeader('Content-Type', 'application/json');
           res.json(data);
