@@ -1,5 +1,6 @@
 /* REQUIREMENTS */
 let users = require('./get/users');
+let status = require('./get/status')
 let Logger = require('./utils/logger')
 let logger = new Logger("index", "debug")
 // TODO change let to let
@@ -23,7 +24,12 @@ app.get('/API/getUser', function(req, res) {
   res = users.getUser(db, url, req, res)
 })
 
-/* if bad answer by getUser() */
+/* /API/get/status */
+app.get('/api/get/status', function(req, res) {
+  res = status.getStatus(db, url, req, res)
+})
+
+/* if bad answer not found 404 */
 .use(function(req, res, next){
     res.setHeader('Content-Type', 'text/plain');
     res.status(404).send('Page introuvable !');
