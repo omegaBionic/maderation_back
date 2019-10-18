@@ -1,8 +1,8 @@
 /* get status with this command : ${YOUR_IP$}/api/get/status?key=179616f1a4cecab2a7eab481b84d076c */
 /* return code */
 /* badkey: {"status":false,"message":"not_authorized"} /API/get/status?key=wtfkey */
-/* fail to connect dynamodb: {"success":false,"datas":"Error: BDD error"} */
-/* all is OK: {"success":true,"datas":"key: OK, dynamodb: OK"}*/
+/* fail to connect dynamodb: {"status":false,"datas":"Error: BDD error"} */
+/* all is OK: {"status":true,"datas":"key: OK, dynamodb: OK"}*/
 
 let querystring = require('querystring');
 let url = require('url');
@@ -48,13 +48,13 @@ module.exports = {
         if (err) {
             logger.fatal("Error: BDD error");
             res.send({
-            success: false,
+            status: false,
             datas: 'Error: BDD error'
             });
         } else {
             logger.info("database: OK")
             res.send({
-            success: true,
+            status: true,
             datas: 'key: OK, dynamodb: OK'
             });
         }
