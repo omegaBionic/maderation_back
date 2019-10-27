@@ -1,4 +1,4 @@
-/* get status with this command : ${YOUR_IP$}/api/get/status?key=179616f1a4cecab2a7eab481b84d076c */
+/* get status with this command : madera-api.maderation.net/api/get/status?key=179616f1a4cecab2a7eab481b84d076c */
 /* return code */
 /* badkey: {"status":false,"message":"not_authorized"} /API/get/status?key=wtfkey */
 /* fail to connect dynamodb: {"status":false,"datas":"Error: BDD error"} */
