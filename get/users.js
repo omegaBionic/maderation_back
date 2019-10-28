@@ -11,30 +11,42 @@ module.exports = {
     /* parse datas */
     logger.debug("parse datas.");
     let params = querystring.parse(url.parse(req.url).query);
-    logger.debug("username: " + params['username']);
-    logger.debug("password: " + params['password']);
+    logger.debug("key: " + params['key']);
 
     /* check username and password */
-    if ('username' in params && 'password' in params) {
-      let paramsdb = {
-        Key: {
-        "username": {
-        S: params['username']
-        }
-        },
-        TableName: "login_melo"
-      };
-      /* launch request for username and password */
-      db.getItem(paramsdb, function(err, data) {
-        if (err){
-          console.log(err, err.stack);
-        } else {
-          logger.info("datas received from database");
-          logger.debug(JSON.stringify(data));
-          res.setHeader('Content-Type', 'application/json');
-          res.json(data);
-        }
-      });
+    if ('key' in params) {
+      if (params['key'] == "83c2c07ea1251a1a39ec46d52cbba19c"){
+        let paramsdb = {
+          TableName: "madera_user"
+        };
+        /* launch request for username and password */
+        db.scan(paramsdb, function(err, data) {
+          if (err){
+            console.log(err, err.stack);
+            res.json(data);
+          } else {
+            logger.info("datas received from database");
+            res.setHeader('Content-Type', 'application/json');
+            res.send({
+              status: true,
+              datas: data
+              });
+            logger.debug("datas return ok for true status");
+          }
+        });
+      } else { // if bad key
+        logger.info("bad bad_key.");
+        res.send({
+          status: false,
+          datas: 'Error: bad_key'
+          });
+      }
+    } else { // if bad parameter
+      logger.info("bad bad_parameter.");
+      res.send({
+        status: false,
+        datas: 'Error: bad_parameter'
+        });
     }
     return res;
   }

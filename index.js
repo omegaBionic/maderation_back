@@ -20,7 +20,7 @@ let AWS = require('aws-sdk');
 let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 
 /* getUser() */
-app.get('/API/getUser', function(req, res) {
+app.get('/api/get/users', function(req, res) {
   res = users.getUser(db, url, req, res)
 })
 
