@@ -1,5 +1,6 @@
 /* REQUIREMENTS */
 let users = require('./get/users');
+let client = require('./get/client');
 let status = require('./get/status')
 let Logger = require('./utils/logger')
 let logger = new Logger("index", "debug")
@@ -22,6 +23,11 @@ let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 /* getUser() */
 app.get('/api/get/users', function(req, res) {
   res = users.getUser(db, url, req, res)
+})
+
+/* getUser() */
+app.get('/api/get/client', function(req, res) {
+  res = client.getClient(db, url, req, res)
 })
 
 /* /API/get/status */

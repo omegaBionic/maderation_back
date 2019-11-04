@@ -2,10 +2,13 @@ let querystring = require('querystring');
 let url = require('url');
 let Logger = require('../utils/logger')
 let logger = new Logger("users", "debug")
+let Token = require('../utils/token')
 
 module.exports = {
   /* this function is used for get user */
   getUser : function (db, url, req, res){
+    let token = new Token("omegaToken");
+
     logger.debug("request received into getUser function.");
 
     /* parse datas */
