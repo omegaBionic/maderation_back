@@ -8,6 +8,7 @@ let addressClient = require('./get/address_client');
 let addressSupplier = require('./get/address_supplier');
 let category = require('./get/category');
 let chat = require('./get/chat');
+let component = require('./get/component');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -56,6 +57,11 @@ app.get('/api/get/category', function(req, res) {
 /* /api/get/chat */
 app.get('/api/get/chat', function(req, res) {
   res = chat.getChat(db, url, req, res)
+})
+
+/* /api/get/component */
+app.get('/api/get/component', function(req, res) {
+  res = component.getComponent(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
