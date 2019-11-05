@@ -9,6 +9,7 @@ let addressSupplier = require('./get/address_supplier');
 let category = require('./get/category');
 let chat = require('./get/chat');
 let component = require('./get/component');
+let gamme = require('./get/gamme');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -62,6 +63,11 @@ app.get('/api/get/chat', function(req, res) {
 /* /api/get/component */
 app.get('/api/get/component', function(req, res) {
   res = component.getComponent(db, url, req, res)
+})
+
+/* /api/get/gamme */
+app.get('/api/get/gamme', function(req, res) {
+  res = gamme.getGamme(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
