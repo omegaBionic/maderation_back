@@ -1,7 +1,7 @@
 /* REQUIREMENTS */
-let Logger = require('./utils/logger')
-let status = require('./get/status')
-let logger = new Logger("index", "debug")
+let Logger = require('./utils/logger');
+let status = require('./get/status');
+let logger = new Logger("index", "debug");
 let users = require('./get/users');
 let client = require('./get/client');
 let addressClient = require('./get/address_client');
@@ -10,6 +10,7 @@ let category = require('./get/category');
 let chat = require('./get/chat');
 let component = require('./get/component');
 let gamme = require('./get/gamme');
+let invoiceQuotation = require('./get/invoice_quotation');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -68,6 +69,11 @@ app.get('/api/get/component', function(req, res) {
 /* /api/get/gamme */
 app.get('/api/get/gamme', function(req, res) {
   res = gamme.getGamme(db, url, req, res)
+})
+
+/* /api/get/invoice_quotation */
+app.get('/api/get/invoice_quotation', function(req, res) {
+  res = invoiceQuotation.getInvoiceQuotation(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
