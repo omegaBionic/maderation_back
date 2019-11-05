@@ -27,8 +27,8 @@ module.exports = {
           } else {
             logger.info("datas received from database");
             res.setHeader('Content-Type', 'application/json');
-            res.status(500).send({
-              status: 500,
+            res.status(200).send({
+              status: 200,
               datas: data
             });
             logger.debug("datas return ok for true status");
