@@ -20,6 +20,7 @@ let quotation = require('./get/quotation');
 let role = require('./get/role');
 let shop = require('./get/shop');
 let stock = require('./get/stock');
+let supplier = require('./get/supplier');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -128,6 +129,11 @@ app.get('/api/get/shop', function(req, res) {
 /* /api/get/stock */
 app.get('/api/get/stock', function(req, res) {
   res = stock.getStock(db, url, req, res)
+})
+
+/* /api/get/supplier */
+app.get('/api/get/supplier', function(req, res) {
+  res = supplier.getSupplier(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
