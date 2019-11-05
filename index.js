@@ -18,6 +18,7 @@ let promotionCat = require('./get/promotion_cat');
 let promotionComp = require('./get/promotion_comp');
 let quotation = require('./get/quotation');
 let role = require('./get/role');
+let shop = require('./get/shop');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -116,6 +117,11 @@ app.get('/api/get/quotation', function(req, res) {
 /* /api/get/role */
 app.get('/api/get/role', function(req, res) {
   res = role.getRole(db, url, req, res)
+})
+
+/* /api/get/shop */
+app.get('/api/get/shop', function(req, res) {
+  res = shop.getShop(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
