@@ -23,17 +23,28 @@ module.exports = {
 
     /* check if it's good key */
     logger.debug("check key");
-    if (params['key'] == secureKey){
-        logger.info("accepted key");
-        isAllowed = true;
+    if ('key' in params) {
+        if (params['key'] == secureKey){
+            logger.info("accepted key");
+            isAllowed = true;
+        } else {
+            logger.info("not_authorized");
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).send({
+                    status: 500,
+                    datas: 'Error: bad key'
+                });
+            logger.debug("sended to client: not_authorized because bad key");
+            isAllowed = false;
+        }
     } else {
-        logger.info("not_authorized");
-            res.setHeader('Content-Type', 'application/json');
-            res.status(500).send({
-                status: 500,
-                datas: 'Error: bad key'
-            });
-        logger.debug("sended to client: not_authorized");
+        logger.info("not_authorized, bad parameter");
+        res.setHeader('Content-Type', 'application/json');
+        res.status(500).send({
+            status: 500,
+            datas: 'Error: bad parameter'
+        });
+        logger.debug("sended to client: not_authorized because bad parameter");
         isAllowed = false;
     }
 
