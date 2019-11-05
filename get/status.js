@@ -28,9 +28,10 @@ module.exports = {
         isAllowed = true;
     } else {
         logger.info("not_authorized");
-        res.send({
-            status: false,
-            datas: 'Error: not_authorized'
+            res.setHeader('Content-Type', 'application/json');
+            res.status(500).send({
+                status: 500,
+                datas: 'Error: bad key'
             });
         logger.debug("sended to client: not_authorized");
         isAllowed = false;
@@ -47,15 +48,17 @@ module.exports = {
     db.scan(paramsdb, function(err, data) {
         if (err) {
             logger.fatal("Error: BDD error");
-            res.send({
-            status: false,
-            datas: 'Error: BDD error'
+            res.setHeader('Content-Type', 'application/json');
+            res.status(500).send({
+              status: 500,
+              datas: 'Error: BDD error'
             });
         } else {
             logger.info("database: OK")
-            res.send({
-            status: true,
-            datas: 'key: OK, dynamodb: OK'
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).send({
+              status: 200,
+              datas: 'OK'
             });
         }
     });
