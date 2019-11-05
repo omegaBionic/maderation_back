@@ -15,6 +15,7 @@ let message = require('./get/message');
 let product = require('./get/product');
 let project = require('./get/project');
 let promotionCat = require('./get/promotion_cat');
+let promotionComp = require('./get/promotion_comp');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -98,6 +99,11 @@ app.get('/api/get/project', function(req, res) {
 /* /api/get/promotion_cat */
 app.get('/api/get/promotion_cat', function(req, res) {
   res = promotionCat.getPromotionCat(db, url, req, res)
+})
+
+/* /api/get/promotion_comp */
+app.get('/api/get/promotion_comp', function(req, res) {
+  res = promotionComp.getPromotionComp(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
