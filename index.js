@@ -13,6 +13,7 @@ let gamme = require('./get/gamme');
 let invoiceQuotation = require('./get/invoice_quotation');
 let message = require('./get/message');
 let product = require('./get/product');
+let project = require('./get/project');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -86,6 +87,11 @@ app.get('/api/get/message', function(req, res) {
 /* /api/get/product */
 app.get('/api/get/product', function(req, res) {
   res = product.getProduct(db, url, req, res)
+})
+
+/* /api/get/project */
+app.get('/api/get/project', function(req, res) {
+  res = project.getProject(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
