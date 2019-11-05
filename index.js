@@ -20,19 +20,19 @@ app.listen(8080);
 let AWS = require('aws-sdk');
 let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 
-/* getUser() */
-app.get('/api/get/users', function(req, res) {
+/* /api/get/status */
+app.get('/api/get/status', function(req, res) {
+  res = status.getStatus(db, url, req, res)
+})
+
+/* /api/get/user */
+app.get('/api/get/user', function(req, res) {
   res = users.getUser(db, url, req, res)
 })
 
-/* getUser() */
+/* /api/get/client */
 app.get('/api/get/client', function(req, res) {
   res = client.getClient(db, url, req, res)
-})
-
-/* /API/get/status */
-app.get('/api/get/status', function(req, res) {
-  res = status.getStatus(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
