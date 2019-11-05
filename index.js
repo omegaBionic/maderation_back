@@ -12,6 +12,7 @@ let component = require('./get/component');
 let gamme = require('./get/gamme');
 let invoiceQuotation = require('./get/invoice_quotation');
 let message = require('./get/message');
+let product = require('./get/product');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -80,6 +81,11 @@ app.get('/api/get/invoice_quotation', function(req, res) {
 /* /api/get/message */
 app.get('/api/get/message', function(req, res) {
   res = message.getMessage(db, url, req, res)
+})
+
+/* /api/get/product */
+app.get('/api/get/product', function(req, res) {
+  res = product.getProduct(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
