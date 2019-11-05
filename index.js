@@ -5,6 +5,7 @@ let logger = new Logger("index", "debug")
 let users = require('./get/users');
 let client = require('./get/client');
 let addressClient = require('./get/address_client');
+let addressSupplier = require('./get/address_supplier');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -38,6 +39,11 @@ app.get('/api/get/client', function(req, res) {
 /* /api/get/address_client */
 app.get('/api/get/address_client', function(req, res) {
   res = addressClient.getAddressClient(db, url, req, res)
+})
+
+/* /api/get/address_supplier */
+app.get('/api/get/address_supplier', function(req, res) {
+  res = addressSupplier.getAddressSupplier(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
