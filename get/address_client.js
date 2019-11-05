@@ -1,7 +1,7 @@
 let querystring = require('querystring');
 let url = require('url');
 let Logger = require('../utils/logger')
-let logger = new Logger("addressClient", "debug")
+let logger = new Logger("address_client", "debug")
 
 module.exports = {
   /* this function is used for get addressClient */
