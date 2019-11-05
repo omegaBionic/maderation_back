@@ -1,10 +1,10 @@
 /* REQUIREMENTS */
+let Logger = require('./utils/logger')
+let status = require('./get/status')
+let logger = new Logger("index", "debug")
 let users = require('./get/users');
 let client = require('./get/client');
-let status = require('./get/status')
-let Logger = require('./utils/logger')
-let logger = new Logger("index", "debug")
-// TODO change let to let
+let addressClient = require('./get/address_client');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -33,6 +33,11 @@ app.get('/api/get/user', function(req, res) {
 /* /api/get/client */
 app.get('/api/get/client', function(req, res) {
   res = client.getClient(db, url, req, res)
+})
+
+/* /api/get/address_client */
+app.get('/api/get/address_client', function(req, res) {
+  res = addressClient.getAddressClient(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
