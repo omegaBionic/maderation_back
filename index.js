@@ -7,6 +7,7 @@ let client = require('./get/client');
 let addressClient = require('./get/address_client');
 let addressSupplier = require('./get/address_supplier');
 let category = require('./get/category');
+let chat = require('./get/chat');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -50,6 +51,11 @@ app.get('/api/get/address_supplier', function(req, res) {
 /* /api/get/category */
 app.get('/api/get/category', function(req, res) {
   res = category.getCategory(db, url, req, res)
+})
+
+/* /api/get/chat */
+app.get('/api/get/chat', function(req, res) {
+  res = chat.getChat(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
