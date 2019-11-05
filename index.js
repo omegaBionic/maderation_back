@@ -37,6 +37,9 @@ app.get('/api/get/status', function(req, res) {
 
 /* if bad answer not found 404 */
 .use(function(req, res, next){
-    res.setHeader('Content-Type', 'text/plain');
-    res.status(404).send('Page introuvable !');
+  res.setHeader('Content-Type', 'application/json');
+  res.status(404).send({
+    status: 404,
+    datas: 'page not found'
+  });
 });
