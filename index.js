@@ -6,6 +6,7 @@ let users = require('./get/users');
 let client = require('./get/client');
 let addressClient = require('./get/address_client');
 let addressSupplier = require('./get/address_supplier');
+let category = require('./get/category');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -44,6 +45,11 @@ app.get('/api/get/address_client', function(req, res) {
 /* /api/get/address_supplier */
 app.get('/api/get/address_supplier', function(req, res) {
   res = addressSupplier.getAddressSupplier(db, url, req, res)
+})
+
+/* /api/get/category */
+app.get('/api/get/category', function(req, res) {
+  res = category.getCategory(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
