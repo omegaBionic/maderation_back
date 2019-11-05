@@ -11,6 +11,7 @@ let chat = require('./get/chat');
 let component = require('./get/component');
 let gamme = require('./get/gamme');
 let invoiceQuotation = require('./get/invoice_quotation');
+let message = require('./get/message');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -74,6 +75,11 @@ app.get('/api/get/gamme', function(req, res) {
 /* /api/get/invoice_quotation */
 app.get('/api/get/invoice_quotation', function(req, res) {
   res = invoiceQuotation.getInvoiceQuotation(db, url, req, res)
+})
+
+/* /api/get/message */
+app.get('/api/get/message', function(req, res) {
+  res = message.getMessage(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
