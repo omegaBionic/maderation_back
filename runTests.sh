@@ -8,7 +8,7 @@
 
 # launch tests
 /bin/echo "Mocha test in running..."
-./node_modules/.bin/mocha tests/mocha.test.js
+./node_modules/.bin/mocha --recursive tests/
 /bin/echo "Mocha test in done."
 
 # kill node server
