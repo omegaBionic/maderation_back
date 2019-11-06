@@ -52,7 +52,7 @@ module.exports = {
     if (isAllowed){
     logger.debug("check database status");
     let paramsdb = {
-            TableName: "login_melo",
+            TableName: "madera_role",
             Limit : 1
     };
 
