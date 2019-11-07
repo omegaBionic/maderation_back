@@ -33,7 +33,8 @@ let querystring = require('querystring');
 
 /* start the http listening server */
 let app = express();
-app.listen(8080);
+let appListenPort = process.argv.slice(2)[0];
+app.listen(appListenPort);
 
 /* aws connection */
 let AWS = require('aws-sdk');
