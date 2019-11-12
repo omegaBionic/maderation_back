@@ -1,7 +1,75 @@
 # How to install maderation_back
 
 
-#TODO code erreur status + code erreur page not found..
+# commands
+### get :
+get status
+http://madera-api.maderation.net:8080/api/get/status?key=179616f1a4cecab2a7eab481b84d076c
+
+get user
+http://madera-api.maderation.net:8080/api/get/user?key=83c2c07ea1251a1a39ec46d52cbba19c
+
+get client
+http://madera-api.maderation.net:8080/api/get/client?key=9f15cb387f77c3284bd1bdc364a21eb7
+
+get address_client
+http://madera-api.maderation.net:8080/api/get/address_client?key=28e60ed41c0a59a442cade866bff3a97
+
+get address_supplier
+http://madera-api.maderation.net:8080/api/get/address_supplier?key=33f85cb0c62fc22f5c2ad0f067c5e83a
+
+get category
+http://madera-api.maderation.net:8080/api/get/category?key=182ea700442885f568585f374423073d
+
+get chat
+http://madera-api.maderation.net:8080/api/get/chat?key=80aacfbde81d03d20788f370417651cc
+
+get component
+http://madera-api.maderation.net:8080/api/get/component?key=6400edeffb01785cb7426801619d8535
+
+get gamme
+http://madera-api.maderation.net:8080/api/get/gamme?key=9af660ef63fbb9e5175d56f064d7a0db
+
+get invoice_quotation
+http://madera-api.maderation.net:8080/api/get/invoice_quotation?key=74cc360b19fc2a94ea620ef5803a381b
+
+get message
+http://madera-api.maderation.net:8080/api/get/message?key=a853ca2949386f7d527bf06117bda9e3
+
+get product
+http://madera-api.maderation.net:8080/api/get/product?key=4789725dd2d8061e7faf00fce9af48e1
+
+get project
+http://madera-api.maderation.net:8080/api/get/project?key=3f61093fa59c13f81fc8648a3d644e0b
+
+get promotion_cat
+http://madera-api.maderation.net:8080/api/get/promotion_cat?key=557c0271e30cf474e0f46f93721fd1ba
+
+get promotion_comp
+http://madera-api.maderation.net:8080/api/get/promotion_comp?key=2b11565d85da178b3a1942a22d20c624
+
+get quotation
+http://madera-api.maderation.net:8080/api/get/quotation?key=eb307516cffbc5e529cf9c7350ffc299
+
+get role
+http://madera-api.maderation.net:8080/api/get/role?key=33f85cb0c62f522f5c2ad09067c5e83a
+
+get shop
+http://madera-api.maderation.net:8080/api/get/shop?key=p3f85cbdc62fc22f5c2ad0f067m5eldlda
+
+get stock
+http://madera-api.maderation.net:8080/api/get/stock?key=93f85cb0cc2fc22f5c2ad0f067c5e95116
+
+get supplier
+http://madera-api.maderation.net:8080/api/get/supplier?key=3ff85cb0c62fc22z5c2adff067c5e83a
+
+## Return code:
+Return code:
+200: OK
+401: unauthorized
+403: forbidden
+404: page not found
+500: internal server error
 
 ## How install test server :
 ```bash
