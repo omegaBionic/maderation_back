@@ -43,7 +43,7 @@ class Id{
       logger.debug("idNumber is in json file: KO");
       //this.idJsonObject.push('"this.idNumber":{"madera_chat":true}');
 
-      let addToJson = '{"' + this.idNumber + '":{"address_client": true, "address_supplier": true, "all": true, "category": true, "chat": true, "client": true, "component": true, "gamme": true, "invoice_quotation": true, "message": true, "product": true, "project": true, "promotion_cat": true, "promotion_comp": true, "quotation": true, "role": true, "shop": true, "status": true, "stock": true, "supplier": true, "users": true}';
+      let addToJson = '{"' + this.idNumber + '":{"address_client": true, "address_supplier": true, "all": true, "category": true, "chat": true, "client": true, "component": true, "gamme": true, "invoice_quotation": true, "message": true, "product": true, "project": true, "promotion_cat": true, "promotion_comp": true, "quotation": true, "role": true, "shop": true, "status": true, "stock": true, "supplier": true, "users": true}}';
       logger.info("addToJson: '" + addToJson + "'");
 
       Object.assign(this.idJsonObject, JSON.parse(addToJson))
