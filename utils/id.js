@@ -15,6 +15,7 @@ class Id{
     this.idFullName = this.idPath + this.idName;
     this.idNumber;
     this.idJsonObject = {};
+    this.returnError = "-1";
 
     /* open write file */
     if (fs.existsSync(this.idFullName)){
@@ -49,6 +50,18 @@ class Id{
       Object.assign(this.idJsonObject, JSON.parse(addToJson))
 
       fs.writeFileSync(this.idFullName, JSON.stringify(this.idJsonObject));
+    }
+  }
+
+  getSyncById(id){
+    /* check and return datas from "resources/id.json" */
+    logger.debug("getSyncById for: '" + id + "'");
+    if (id in this.idJsonObject){
+      logger.debug("id found, return this datas: " + JSON.stringify(this.idJsonObject[id]));
+      return this.idJsonObject[id];
+    } else {
+      logger.debug("id not found, return this datas: " + JSON.stringify(this.returnError));
+      return this.returnError;
     }
   }
 }

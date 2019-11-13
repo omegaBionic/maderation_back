@@ -5,6 +5,7 @@ let logger = new Logger("index", "debug");
 let Id = require('./utils/id');
 id = new Id();
 
+let sync = require('./get/sync');
 let users = require('./get/users');
 let client = require('./get/client');
 let addressClient = require('./get/address_client');
@@ -39,6 +40,11 @@ app.listen(appListenPort);
 /* aws connection */
 let AWS = require('aws-sdk');
 let db = new AWS.DynamoDB({'region': 'eu-west-3'});
+
+/* /api/get/sync */
+app.get('/api/get/sync', function(req, res) {
+  res = sync.getSync(id, db, url, req, res);
+})
 
 /* /api/get/status */
 app.get('/api/get/status', function(req, res) {
