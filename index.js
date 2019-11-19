@@ -26,6 +26,8 @@ let shop = require('./get/shop');
 let stock = require('./get/stock');
 let supplier = require('./get/supplier');
 
+let usersPost = require('./post/users');
+
 /* MODULS AND SETUP */
 let express = require('express');
 let http = require('http');
@@ -164,6 +166,12 @@ app.get('/api/get/stock', function(req, res) {
 app.get('/api/get/supplier', function(req, res) {
   id.checkId(db, url, req, res);
   res = supplier.getSupplier(db, url, req, res)
+})
+
+/* /api/post/users */
+app.get('/api/post/users', function(req, res) {
+  id.checkId(db, url, req, res);
+  res = usersPost.postUser(db, url, req, res)
 })
 
 /* if bad answer not found 404 */
