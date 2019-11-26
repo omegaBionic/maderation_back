@@ -73,20 +73,71 @@ Return code:
 
 ## How install prod server :
 ```bash
-curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-sudo apt-get intall nodejs
-node -v
+$ curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+$ sudo apt-get intall nodejs
+$ node -v
+```
+## for run test use :
+```bash
+$ ./runServer.sh
 ```
 
 ## How install test server :
 ```bash
-npm install supertest
-npm install mocha
+$ npm install supertest
+$ npm install mocha
 ```
-
 ## for run test use :
 ```bash
 $ ./runTests.sh 
+```
+
+## ansible configuration
+```bash
+
+- name: manage users
+  user:
+    name: jenkins
+    groups: jenkins
+    append: yes
+    shell: /bin/bash
+    password: jenkins
+    state: present
+    createhome: yes
+    remove: yes
+
+- name: Copy ssh key for git
+  copy:
+    src: /data/private.ppk
+    dest: /home/jenkins/.ssh/id_rsa
+    owner: jenkins
+    group: jenkins
+    mode: '0600'
+
+- name: Copy ssh key for git
+  copy:
+    src: /data/public.ppk
+    dest: /home/jenkins/.ssh/id_rsa.pub
+    owner: jenkins
+    group: jenkins
+    mode: '0600'
+
+- name: get nodejs key
+  shell: "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
+
+- name: install nodejs
+  apt:
+   name: nodejs
+   state: present
+
+- name: get git repo
+  git:
+    repo: jenkins@bitbucket.org/melodianocturnis/maderation_back.git
+    dest: /home/jenkins/maderation_back
+    owner: jenkins
+
+- name: run server
+  shell: /home/jenkins/maderation_back/runServer.sh
 ```
 
 ## Overview
