@@ -73,9 +73,8 @@ Return code:
 
 ## How install prod server :
 ```bash
-$ curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-$ sudo apt-get intall nodejs
-$ node -v
+$ sudo apt-get install ansible
+$ ansible-playbook install.yml
 ```
 ## for run test use :
 ```bash
