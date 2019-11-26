@@ -31,8 +31,38 @@ class DatabaseFactory{
 
     /* add data into database */
     add(inputJson, table){
-        // TODO add
-        return 1
+        let returnStatus = 0
+        switch(this.dataBaseType){
+            case "aws":
+                /* insert/push datas into dynamodb */
+                let datasJson = JSON.parse(params['datas'])
+                let paramsdb = {
+                    TableName: "madera_user",
+                    Item: datasJson
+                };
+
+                this.db.putItem(paramsdb, function(err, data) {
+                    if (err){
+                        console.log(err, err.stack);
+                        res.json(data);
+                    } else {
+                        logger.info("datas pushed into database");
+                        res.setHeader('Content-Type', 'application/json');
+                        res.status(200).send({
+                        status: 200,
+                        datas: 'datas pushed into database'
+                        });
+                        logger.debug("datas insert into ");
+                    }
+                    });
+                    returnStatus = 200
+                    break;
+            default:
+                logger.error("add: bad dataBaseType into database_factory.")
+                returnStatus = 500
+                break;
+        }
+        return returnStatus
     }
 
     modify(inputJson){

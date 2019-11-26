@@ -28,6 +28,7 @@ let supplier = require('./get/supplier');
 
 let post = require('./post/post_datas');
 
+
 /* MODULS AND SETUP */
 let express = require('express');
 let http = require('http');
@@ -42,22 +43,26 @@ app.listen(appListenPort);
 /* aws connection */
 let AWS = require('aws-sdk');
 let db = new AWS.DynamoDB({'region': 'eu-west-3'});
+let DataBaseFactory = require('./engine/database_factory')
+let dataBase = new DataBaseFactory("aws")
 
-/* /api/get/sync */
-app.get('/api/get/sync', function(req, res) {
-  res = sync.getSync(id, db, url, req, res);
-})
-
-/* /api/post/postall */
-app.get('/api/post/post_datas', function(req, res) {
+/* POST */
+/* /api/post/post_all */
+app.post('/api/post/post_datas', function(req, res) {
   id.checkId(db, url, req, res);
-  res = post.postAll(db, url, req, res)
+  res = post.postDatas(dataBase, url, req, res)
 })
 
+/* GET */
 /* /api/get/status */
 app.get('/api/get/status', function(req, res) {
   id.checkId(db, url, req, res);
   res = status.getStatus(db, url, req, res)
+})
+
+/* /api/get/sync */
+app.get('/api/get/sync', function(req, res) {
+  res = sync.getSync(id, db, url, req, res);
 })
 
 /* /api/get/user */
