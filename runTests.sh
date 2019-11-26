@@ -17,6 +17,6 @@ RETURN_CODE=$?
 # kill node server
 /bin/echo "Server in kill..."
 /usr/bin/killall -9 node
-/bin/echo "Server in killed."
+/bin/echo "Server killed."
 
 exit ${RETURN_CODE}
