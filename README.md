@@ -71,6 +71,13 @@ Return code:
 404: page not found
 500: internal server error
 
+## How install prod server :
+```bash
+curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+sudo apt-get intall nodejs
+node -v
+```
+
 ## How install test server :
 ```bash
 npm install supertest
