@@ -5,8 +5,8 @@ let json = require('../utils/json')
 let logger = new Logger("postDatas", "debug")
 
 module.exports = {
-  /* this function is used for get users */
-  postDatas : function (db, url, req, res){
+    /* this function is used for get users */
+    postDatas : function (db, url, req, res){
     logger.debug("request received into getusers function.");
 
     /* parse datas */
@@ -15,55 +15,74 @@ module.exports = {
     logger.debug("key: " + params['key']);
 
     /* check key and check datas */
-    if ('key' in params && 'datas' in params) {
+    if ('key' in params) {
       if (params['key'] == "993b06009dce6a9962esecf49801d32e"){
-        /* check if params['datas'] is json */
-        if (json.isJson(params['datas'])){
-            
-            // TODO: check is item exist into database
-            
-            /* insert/push datas into dynamodb */
-            let datasJson = JSON.parse(params['datas'])
-            let paramsdb = {
-                TableName: "madera_user",
-                Item: datasJson
-            };
+        /* get and parse body to jsonBody */
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // convert Buffer to string
+        });
 
-            db.putItem(paramsdb, function(err, data) {
-                if (err){
-                  console.log(err, err.stack);
-                  res.json(data);
-                } else {
-                  logger.info("datas pushed into database");
-                  res.setHeader('Content-Type', 'application/json');
-                  res.status(200).send({
-                    status: 200,
-                    datas: 'datas pushed into database'
-                  });
-                  logger.debug("datas insert into ");
+        req.on('end', () => {
+          let jsonBody = JSON.parse(body)
+          //console.debug(jsonBody);
+          for( item in jsonBody ) {
+                console.debug("parse bodyJson");
+                console.debug("item: '" + item + "'");
+                console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
+                console.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
+                console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
+                switch(jsonBody[item].status){
+                    case 'add':
+                        logger.debug("into add case");
+                        break;
+                    case 'modify':
+                        logger.debug("into modify case");
+                        break;
+                    case 'delete':
+                        logger.debug("into delete case");
+                        break;
+                    default:
+                        logger.info("bad status request into json");
+                        break;
                 }
-              });
-        } else {
-            logger.info("datas is not an json");
-            res.setHeader('Content-Type', 'application/json');
-            res.status(500).send({
-              status: 500,
-              datas: 'Error: datas is not an json'
-            });
-        }
+          }
+        });
+
+            /* insert/push datas into dynamodb */
+            // let datasJson = JSON.parse(params['datas'])
+            // let paramsdb = {
+            //     TableName: "madera_user",
+            //     Item: datasJson
+            // };
+
+            // db.putItem(paramsdb, function(err, data) {
+            //     if (err){
+            //       console.log(err, err.stack);
+            //       res.json(data);
+            //     } else {
+            //       logger.info("datas pushed into database");
+            //       res.setHeader('Content-Type', 'application/json');
+            //       res.status(200).send({
+            //         status: 200,
+            //         datas: 'datas pushed into database'
+            //       });
+            //       logger.debug("datas insert into ");
+            //     }
+            //   });
 
       } else { // if bad key
-        logger.info("bad bad_key.");
+            logger.info("bad bad_key.");
+            res.setHeader('Content-Type', 'application/json');
+            res.status(500).send({
+                status: 500,
+                datas: 'Error: bad key'
+            });
+        }
+    } else { // if bad parameter
+        logger.info("bad bad_parameter.");
         res.setHeader('Content-Type', 'application/json');
         res.status(500).send({
-          status: 500,
-          datas: 'Error: bad key'
-        });
-      }
-    } else { // if bad parameter
-      logger.info("bad bad_parameter.");
-      res.setHeader('Content-Type', 'application/json');
-      res.status(500).send({
         status: 500,
         datas: 'Error: bad parameter'
       });
