@@ -26,7 +26,7 @@ let shop = require('./get/shop');
 let stock = require('./get/stock');
 let supplier = require('./get/supplier');
 
-let usersPost = require('./post/users');
+let post = require('./post/post_datas');
 
 /* MODULS AND SETUP */
 let express = require('express');
@@ -46,6 +46,12 @@ let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 /* /api/get/sync */
 app.get('/api/get/sync', function(req, res) {
   res = sync.getSync(id, db, url, req, res);
+})
+
+/* /api/post/postall */
+app.get('/api/post/post_datas', function(req, res) {
+  id.checkId(db, url, req, res);
+  res = post.postAll(db, url, req, res)
 })
 
 /* /api/get/status */
@@ -166,12 +172,6 @@ app.get('/api/get/stock', function(req, res) {
 app.get('/api/get/supplier', function(req, res) {
   id.checkId(db, url, req, res);
   res = supplier.getSupplier(db, url, req, res)
-})
-
-/* /api/post/users */
-app.get('/api/post/users', function(req, res) {
-  id.checkId(db, url, req, res);
-  res = usersPost.postUser(db, url, req, res)
 })
 
 /* if bad answer not found 404 */

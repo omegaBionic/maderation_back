@@ -2,11 +2,11 @@ let querystring = require('querystring');
 let url = require('url');
 let Logger = require('../utils/logger')
 let json = require('../utils/json')
-let logger = new Logger("usersPost", "debug")
+let logger = new Logger("postDatas", "debug")
 
 module.exports = {
   /* this function is used for get users */
-  postUser : function (db, url, req, res){
+  postDatas : function (db, url, req, res){
     logger.debug("request received into getusers function.");
 
     /* parse datas */
