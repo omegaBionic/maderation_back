@@ -24,29 +24,45 @@ module.exports = {
         });
 
         req.on('end', () => {
-          let jsonBody = JSON.parse(body)
-          //console.debug(jsonBody);
-          for( item in jsonBody ) {
-                console.debug("parse bodyJson");
-                console.debug("item: '" + item + "'");
-                console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
-                console.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
-                console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
-                switch(jsonBody[item].status){
-                    case 'add':
-                        logger.debug("into add case");
-                        break;
-                    case 'modify':
-                        logger.debug("into modify case");
-                        break;
-                    case 'delete':
-                        logger.debug("into delete case");
-                        break;
-                    default:
-                        logger.info("bad status request into json");
-                        break;
-                }
-          }
+          if (json.isJson(body)){ // check data integrity
+            logger.debug("inputJson is in json format");
+            let jsonBody = JSON.parse(body)
+            for( item in jsonBody ) {
+                    console.info("parse bodyJson");
+                    console.debug("item: '" + item + "'");
+                    console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
+                    console.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
+                    console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
+                    switch(jsonBody[item].status){
+                        case 'add':
+                            let returnStatus = dataBase.add(jsonBody[item].table, jsonBody[item].values)
+                            logger.debug("returnStatus: " + returnStatus);
+
+                            res.setHeader('Content-Type', 'application/json');
+                            res.status(returnStatus[1]).send({
+                                status: returnStatus[1],
+                                datas: returnStatus[0]
+                            });
+                            break;
+                        case 'modify':
+                            logger.debug("into modify case");
+                            break;
+                        case 'delete':
+                            logger.debug("into delete case");
+                            break;
+                        default:
+                            logger.info("bad status request into json");
+                            break;
+                    }
+            }
+        } else {
+            logger.info("inputJson is not in json format");
+            res.setHeader('Content-Type', 'application/json');
+            res.status(500).send({
+                status: 500,
+                datas: 'inputJson is not in json format'
+            });
+        }
         });
 
             /* insert/push datas into dynamodb */
