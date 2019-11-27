@@ -5,23 +5,21 @@ let AWS = require('aws-sdk');
 
 
 class DatabaseFactory{
-  constructor(dataBaseType){
-    
-    this.dataBaseType = dataBaseType
-
-    switch(this.dataBaseType){
-        case "aws":
-            /* aws connection */
-            this.AWS = require('aws-sdk');
-            logger.debug("open amazon bdd")
-            this.db = new AWS.DynamoDB({'region': 'eu-west-3'});
-            logger.info("aws bdd connexion is ready")
-            break;
-        default:
-            logger.error("bad dataBaseType into database_factory.")
-            break;
+    constructor(dataBaseType){
+        this.dataBaseType = dataBaseType
+        switch(this.dataBaseType){
+            case "aws":
+                /* aws connection */
+                this.AWS = require('aws-sdk');
+                logger.debug("open amazon bdd")
+                this.db = new AWS.DynamoDB({'region': 'eu-west-3'});
+                logger.info("aws bdd connexion is ready")
+                break;
+            default:
+                logger.error("bad dataBaseType into database_factory.")
+                break;
+        }
     }
-  }
 
     get(inputJson){
         // TODO get
@@ -30,39 +28,36 @@ class DatabaseFactory{
     }
 
     /* add data into database */
-    add(inputJson, table){
-        let returnStatus = 0
+    add(table, datasJson){
+        let returnStatus = 500
+        let returnMessage = ""
+
+        /* insert and push datas into dynamodb */
         switch(this.dataBaseType){
             case "aws":
-                /* insert/push datas into dynamodb */
-                let datasJson = JSON.parse(params['datas'])
                 let paramsdb = {
-                    TableName: "madera_user",
+                    TableName: table,
                     Item: datasJson
                 };
-
                 this.db.putItem(paramsdb, function(err, data) {
                     if (err){
-                        console.log(err, err.stack);
-                        res.json(data);
+                        returnStatus = 500
+                        returnMessage = "problem for push json into database: '" + err + "'"
+                        logger.error(returnMessage);
                     } else {
-                        logger.info("datas pushed into database");
-                        res.setHeader('Content-Type', 'application/json');
-                        res.status(200).send({
-                        status: 200,
-                        datas: 'datas pushed into database'
-                        });
-                        logger.debug("datas insert into ");
+                        returnStatus = 200
+                        returnMessage = "datas pushed into database"
+                        logger.info(returnMessage);
                     }
-                    });
-                    returnStatus = 200
-                    break;
+                });
+                break;
             default:
-                logger.error("add: bad dataBaseType into database_factory.")
                 returnStatus = 500
+                returnMessage = "add: bad dataBaseType into database_factory."
+                logger.error(returnMessage)
                 break;
         }
-        return returnStatus
+        return [returnMessage, returnStatus]
     }
 
     modify(inputJson){
