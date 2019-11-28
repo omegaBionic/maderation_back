@@ -45,7 +45,7 @@ module.exports = {
                         db.putItem(paramsdb, function(err, data) {
                             if (err){
                             console.log(err, err.stack);
-                            res.json(data);
+                            //res.json(data);
                             } else {
                             logger.info("datas pushed into database");
                             }
@@ -61,12 +61,12 @@ module.exports = {
                         logger.info("bad status request into json");
                         break;
                 }
-                res.setHeader('Content-Type', 'application/json');
-                res.status(200).send({
-                    status: 200,
-                    datas: 'datas pushed into database'
-                });
             }
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).send({
+                status: 200,
+                datas: 'datas pushed into database'
+            });
         } else {
             logger.info("inputJson is not in json format");
             res.setHeader('Content-Type', 'application/json');
