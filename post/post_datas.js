@@ -28,25 +28,44 @@ module.exports = {
             logger.debug("inputJson is in json format");
             let jsonBody = JSON.parse(body)
             for( item in jsonBody ) {
-                    console.info("parse bodyJson");
-                    console.debug("item: '" + item + "'");
-                    console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
-                    console.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
-                    console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
-                    switch(jsonBody[item].status){
-                        case 'add':
-                            logger.debug("into add case");
-                            break;
-                        case 'modify':
-                            logger.debug("into modify case");
-                            break;
-                        case 'delete':
-                            logger.debug("into delete case");
-                            break;
-                        default:
-                            logger.info("bad status request into json");
-                            break;
-                    }
+                console.info("parse bodyJson");
+                console.debug("item: '" + item + "'");
+                console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
+                console.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
+                console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
+                switch(jsonBody[item].status){
+                    case 'add':
+                        logger.debug("into add case");
+                        /* insert/push datas into dynamodb */
+                        let paramsdb = {
+                            TableName: jsonBody[item].table,
+                            Item: jsonBody[item].values
+                        };
+
+                        db.putItem(paramsdb, function(err, data) {
+                            if (err){
+                            console.log(err, err.stack);
+                            res.json(data);
+                            } else {
+                            logger.info("datas pushed into database");
+                            }
+                        });
+                        break;
+                    case 'modify':
+                        logger.debug("into modify case");
+                        break;
+                    case 'delete':
+                        logger.debug("into delete case");
+                        break;
+                    default:
+                        logger.info("bad status request into json");
+                        break;
+                }
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).send({
+                    status: 200,
+                    datas: 'datas pushed into database'
+                });
             }
         } else {
             logger.info("inputJson is not in json format");
@@ -57,29 +76,6 @@ module.exports = {
             });
         }
         });
-
-            /* insert/push datas into dynamodb */
-            // let datasJson = JSON.parse(params['datas'])
-            // let paramsdb = {
-            //     TableName: "madera_user",
-            //     Item: datasJson
-            // };
-
-            // db.putItem(paramsdb, function(err, data) {
-            //     if (err){
-            //       console.log(err, err.stack);
-            //       res.json(data);
-            //     } else {
-            //       logger.info("datas pushed into database");
-            //       res.setHeader('Content-Type', 'application/json');
-            //       res.status(200).send({
-            //         status: 200,
-            //         datas: 'datas pushed into database'
-            //       });
-            //       logger.debug("datas insert into ");
-            //     }
-            //   });
-
       } else { // if bad key
             logger.info("bad bad_key.");
             res.setHeader('Content-Type', 'application/json');
