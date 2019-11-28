@@ -6,7 +6,7 @@ let logger = new Logger("postDatas", "debug")
 
 module.exports = {
     /* this function is used for get users */
-    postDatas : function (dataBase, url, req, res){
+    postDatas : function (db, url, req, res){
     logger.debug("request received into getusers function.");
 
     /* parse datas */
@@ -35,14 +35,7 @@ module.exports = {
                     console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
                     switch(jsonBody[item].status){
                         case 'add':
-                            let returnStatus = dataBase.add(jsonBody[item].table, jsonBody[item].values)
-                            logger.debug("returnStatus: " + returnStatus);
-
-                            res.setHeader('Content-Type', 'application/json');
-                            res.status(returnStatus[1]).send({
-                                status: returnStatus[1],
-                                datas: returnStatus[0]
-                            });
+                            logger.debug("into add case");
                             break;
                         case 'modify':
                             logger.debug("into modify case");

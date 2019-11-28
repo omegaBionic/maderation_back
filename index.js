@@ -43,14 +43,12 @@ app.listen(appListenPort);
 /* aws connection */
 let AWS = require('aws-sdk');
 let db = new AWS.DynamoDB({'region': 'eu-west-3'});
-let DataBaseFactory = require('./engine/database_factory')
-let dataBase = new DataBaseFactory("aws")
 
 /* POST */
 /* /api/post/post_all */
 app.post('/api/post/post_datas', function(req, res) {
   id.checkId(db, url, req, res);
-  res = post.postDatas(dataBase, url, req, res)
+  res = post.postDatas(db, url, req, res)
 })
 
 /* GET */
