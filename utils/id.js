@@ -69,6 +69,10 @@ class Id{
       return this.returnError;
     }
   }
+
+  getId(){
+    return this.idNumber;
+  }
 }
 
 module.exports = Id

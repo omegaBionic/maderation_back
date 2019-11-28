@@ -48,7 +48,7 @@ let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 /* /api/post/post_datas */
 app.post('/api/post/post_datas', function(req, res) {
   id.checkId(db, url, req, res);
-  res = post.postDatas(db, url, req, res)
+  res = post.postDatas(db, url, req, res, id.getId())
 })
 
 /* GET */
