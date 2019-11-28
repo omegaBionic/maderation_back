@@ -13,7 +13,7 @@ class Id{
     this.idPath = "resources/";
     this.idName = "id.json";
     this.idFullName = this.idPath + this.idName;
-    this.idNumber;
+    this.idNumber = "None";
     this.idJsonObject = {};
     this.returnError = "-1";
 
