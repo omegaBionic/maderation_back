@@ -1,5 +1,5 @@
 /* class for id gestion */
-// TODO json vide mais crée + pas le paramètre id
+
 const fs = require('fs')
 let querystring = require('querystring');
 const mkdirp = require('mkdirp');
@@ -13,7 +13,7 @@ class Id{
     this.idPath = "resources/";
     this.idName = "id.json";
     this.idFullName = this.idPath + this.idName;
-    this.idNumber = "None";
+    this.idNumber;
     this.idJsonObject = {};
     this.returnError = "-1";
 
@@ -53,6 +53,7 @@ class Id{
         fs.writeFileSync(this.idFullName, JSON.stringify(this.idJsonObject));
       }
     } else {
+      this.idNumber = "None";
       logger.debug("id not found into param");
     }
   }
