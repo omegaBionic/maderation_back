@@ -45,7 +45,7 @@ class Id{
       } else {
         logger.debug("idNumber is in json file: KO");
 
-        let addToJson = '{"' + this.idNumber + '":{"address_client": true, "address_supplier": true, "all": true, "category": true, "chat": true, "client": true, "component": true, "gamme": true, "invoice_quotation": true, "message": true, "product": true, "project": true, "promotion_cat": true, "promotion_comp": true, "quotation": true, "role": true, "shop": true, "status": true, "stock": true, "supplier": true, "users": true}}';
+        let addToJson = '{"' + this.idNumber + '":{"madera_address_client": true, "madera_address_supplier": true, "madera_all": true, "madera_category": true, "madera_chat": true, "madera_client": true, "madera_component": true, "madera_gamme": true, "madera_invoice_quotation": true, "madera_message": true, "madera_product": true, "madera_project": true, "madera_promotion_cat": true, "madera_promotion_comp": true, "madera_quotation": true, "madera_role": true, "shop": true, "madera_status": true, "madera_stock": true, "madera_supplier": true, "madera_users": true}}';
         logger.info("addToJson: '" + addToJson + "'");
 
         Object.assign(this.idJsonObject, JSON.parse(addToJson))
