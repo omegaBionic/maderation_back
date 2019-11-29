@@ -48,14 +48,18 @@ class Id{
         let addToJson = '{"' + this.idNumber + '":{"madera_address_client": true, "madera_address_supplier": true, "madera_all": true, "madera_category": true, "madera_chat": true, "madera_client": true, "madera_component": true, "madera_gamme": true, "madera_invoice_quotation": true, "madera_message": true, "madera_product": true, "madera_project": true, "madera_promotion_cat": true, "madera_promotion_comp": true, "madera_quotation": true, "madera_role": true, "shop": true, "madera_status": true, "madera_stock": true, "madera_supplier": true, "madera_user": true}}';
         logger.info("addToJson: '" + addToJson + "'");
 
-        Object.assign(this.idJsonObject, JSON.parse(addToJson))
+        Object.assign(this.idJsonObject, JSON.parse(addToJson));
 
-        fs.writeFileSync(this.idFullName, JSON.stringify(this.idJsonObject));
+        this.writeIdJson();
       }
     } else {
       this.idNumber = "None";
       logger.debug("id not found into param");
     }
+  }
+
+  writeIdJson(){
+    fs.writeFileSync(this.idFullName, JSON.stringify(this.idJsonObject));
   }
 
   getSyncById(id){
