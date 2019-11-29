@@ -77,6 +77,24 @@ class Id{
   getId(){
     return this.idNumber;
   }
+
+  setTableStatus(tableUpdated){
+    logger.info("setTableStatus for this id: '" + this.getId() + "'")
+    logger.info("tableUpdated: '" + tableUpdated + "'")
+
+    for (let itemId in this.idJsonObject){
+      if (itemId != this.getId()){
+        logger.debug("itemId not refresh: '" + itemId + "'");
+        logger.debug("idJsonObject[itemId][tableUpdated]: '" + this.idJsonObject[itemId]["madera_address_client"] + "'");
+
+        /* define false for sync */
+        this.idJsonObject[itemId][tableUpdated] = false;
+
+        this.writeIdJson();
+      }
+    }
+
+  }
 }
 
 module.exports = Id

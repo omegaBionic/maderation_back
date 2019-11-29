@@ -61,9 +61,9 @@ module.exports = {
                   logger.info("bad status request into json");
                   break;
               }
+              /* update id.json for sync */
+              id.setTableStatus(jsonBody[item].table)
             }
-            console.log("OMEGA");
-            console.log(id);
 
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send({
