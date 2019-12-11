@@ -27,7 +27,7 @@ module.exports = {
           if (json.isJson(body)) { // check data integrity
             logger.debug("inputJson is in json format");
             let jsonBody = JSON.parse(body)
-            for (item in jsonBody) {
+            for (item in jsonBody) { // TODO remove console logger -> use custom logger
               console.info("parse bodyJson");
               console.debug("item: '" + item + "'");
               console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
@@ -35,8 +35,8 @@ module.exports = {
               console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
               switch (jsonBody[item].status) {
                 case 'add':
+                  /* add datas into dynamodb */
                   logger.debug("into add case");
-                  /* insert/push datas into dynamodb */
                   let paramsdb = {
                     TableName: jsonBody[item].table,
                     Item: jsonBody[item].values
