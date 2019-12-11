@@ -51,9 +51,6 @@ module.exports = {
                     }
                   });
                   break;
-                case 'modify':
-                  logger.debug("into modify case");
-                  break;
                 case 'delete':
                   logger.debug("into delete case");
                   break;
