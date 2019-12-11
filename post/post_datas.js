@@ -52,7 +52,20 @@ module.exports = {
                   });
                   break;
                 case 'delete':
+                  /* delete datas into dynamodb */
                   logger.debug("into delete case");
+                  let paramsdb = {
+                    TableName: jsonBody[item].table,
+                    Item: jsonBody[item].values
+                  };
+                  db.delete(paramsdb, function (err, data) {
+                  if (err) {
+                    console.log(err, err.stack);
+                    //res.json(data);
+                    } else {
+                      logger.info("datas delete from database");
+                    }
+                  });
                   break;
                 default:
                   logger.info("bad status request into json");
