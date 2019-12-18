@@ -71,6 +71,13 @@ Return code:
 404: page not found
 500: internal server error
 
+## setup crendential
+$ aws configure
+AWS Access Key ID [****************4714]:
+AWS Secret Access Key [****************lop2]:
+Default region name [eu-west-3]:
+Default output format [None]:
+
 ## How install prod server :
 ```bash
 $ sudo apt-get install ansible
