@@ -4,6 +4,13 @@ let json = require('../utils/json')
 let Logger = require('../utils/logger')
 let logger = new Logger("postDatas", "debug")
 
+String.prototype.capitalize = function() {
+  return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+const removeItem = (items, i) =>
+  items.slice(0, i-1).concat(items.slice(i, items.length))
+
 module.exports = {
   /* this function is used for get users */
   postDatas: function (db, url, req, res, id) {
@@ -28,23 +35,25 @@ module.exports = {
             logger.debug("inputJson is in json format");
             let jsonBody = JSON.parse(body)
             for (item in jsonBody) { // TODO remove console logger -> use custom logger
-              console.info("parse bodyJson");
-              console.debug("item: '" + item + "'");
-              console.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
-              console.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
-              console.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
+              logger.info("parse bodyJson");
+              logger.debug("item: '" + item + "'");
+              logger.debug("jsonBody[item].status: '" + jsonBody[item].status + "'");
+              logger.debug("jsonBody[item].table: '" + jsonBody[item].table + "'");
+              logger.debug("jsonBody[item].values: '" + JSON.stringify(jsonBody[item].values) + "'");
+              let paramsdb = {}
               switch (jsonBody[item].status) {
                 case 'add':
                   /* add datas into dynamodb */
                   logger.debug("into add case");
-                  let paramsdb = {
+                  paramsdb = {
                     TableName: jsonBody[item].table,
                     Item: jsonBody[item].values
                   };
 
                   db.putItem(paramsdb, function (err, data) {
                     if (err) {
-                      console.log(err, err.stack);
+                      logger.info(err, err.stack);
+                      logger.error("err: '" + err.stack + "' - '" + err.stack + "'");
                       //res.json(data);
                     } else {
                       logger.info("datas pushed into database");
@@ -54,18 +63,53 @@ module.exports = {
                 case 'delete':
                   /* delete datas into dynamodb */
                   logger.debug("into delete case");
-                  let paramsdb = {
-                    TableName: jsonBody[item].table,
-                    Item: jsonBody[item].values
-                  };
-                  db.delete(paramsdb, function (err, data) {
-                  if (err) {
-                    console.log(err, err.stack);
-                    //res.json(data);
-                    } else {
-                      logger.info("datas delete from database");
-                    }
-                  });
+                  if (jsonBody[item].table == "madera_user"){ // for delete param you need to add ONLY id parameter
+                    logger.debug("jsonBody[item].values.username: '" + JSON.stringify(jsonBody[item].values.username) + "'");
+	                  paramsdb = {
+	                    TableName: jsonBody[item].table,
+	                    Key: {
+                        "username": jsonBody[item].values.username
+                      }
+                    };
+	                  db.deleteItem(paramsdb, function (err, data) {
+	                  if (err) {
+                      logger.error("err: '" + err.stack + "' - '" + err.stack + "'");
+	                    } else {
+	                      logger.info("datas delete from database");
+	                    }
+	                  });
+                  } else { // else other than madera_user table
+                    /* generate id key*/
+                    let splitedTable = jsonBody[item].table.split('_')
+                    logger.debug("splitedTable: " + splitedTable);
+
+                    splitedTable = removeItem(splitedTable, 1)
+                    logger.debug("splitedTable: " + splitedTable);
+
+                    let tableId = ""
+                    splitedTable.forEach(element => tableId = tableId + element.capitalize());
+                    logger.debug("tableId: " + tableId);
+
+                    tableId = "id" + tableId
+                    logger.debug("tableId: " + tableId);
+
+                    let fullKey = '{"' + tableId + '": ' + JSON.stringify(jsonBody[item].values[tableId]) + "}"
+                    console.log(fullKey)
+                    fullKey = JSON.parse(fullKey)
+                    console.log(fullKey)
+                    jsonBody[item].table,
+	                  paramsdb = {
+	                    TableName: jsonBody[item].table,
+	                    Key: fullKey
+                    };
+	                  db.deleteItem(paramsdb, function (err, data) {
+	                  if (err) {
+                        logger.error("err: '" + err.stack + "' - '" + err.stack + "'");
+	                    } else {
+	                      logger.info("datas delete from database");
+	                    }
+	                  });
+                  }
                   break;
                 default:
                   logger.info("bad status request into json");
@@ -74,7 +118,6 @@ module.exports = {
               /* update id.json for sync */
               id.setTableStatus(jsonBody[item].table)
             }
-
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send({
               status: 200,
