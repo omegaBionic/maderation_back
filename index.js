@@ -68,120 +68,140 @@ app.get('/api/get/sync', function(req, res) {
 app.get('/api/get/user', function(req, res) {
   id.checkId(db, url, req, res);
   res = users.getUser(db, url, req, res)
+  id.setTableStatus("madera_user", true)
 })
 
 /* /api/get/client */
 app.get('/api/get/client', function(req, res) {
   id.checkId(db, url, req, res);
   res = client.getClient(db, url, req, res)
+  id.setTableStatus("madera_client", true)
 })
 
 /* /api/get/address_client */
 app.get('/api/get/address_client', function(req, res) {
   id.checkId(db, url, req, res);
   res = addressClient.getAddressClient(db, url, req, res)
+  id.setTableStatus("madera_address_client", true)
 })
 
 /* /api/get/address_supplier */
 app.get('/api/get/address_supplier', function(req, res) {
   id.checkId(db, url, req, res);
   res = addressSupplier.getAddressSupplier(db, url, req, res)
+  id.setTableStatus("madera_address_supplier", true)
 })
 
 /* /api/get/category */
 app.get('/api/get/category', function(req, res) {
   id.checkId(db, url, req, res);
   res = category.getCategory(db, url, req, res)
+  id.setTableStatus("madera_category", true)
 })
 
 /* /api/get/chat */
 app.get('/api/get/chat', function(req, res) {
   id.checkId(db, url, req, res);
   res = chat.getChat(db, url, req, res)
+  id.setTableStatus("madera_chat", true)
 })
 
 /* /api/get/component */
 app.get('/api/get/component', function(req, res) {
   id.checkId(db, url, req, res);
   res = component.getComponent(db, url, req, res)
+  id.setTableStatus("madera_component", true)
 })
 
 /* /api/get/gamme */
 app.get('/api/get/gamme', function(req, res) {
   id.checkId(db, url, req, res);
   res = gamme.getGamme(db, url, req, res)
+  id.setTableStatus("madera_gamme", true)
 })
 
 /* /api/get/invoice_quotation */
 app.get('/api/get/invoice_quotation', function(req, res) {
   id.checkId(db, url, req, res);
   res = invoiceQuotation.getInvoiceQuotation(db, url, req, res)
+  id.setTableStatus("madera_invoice_quotation", true)
 })
 
 /* /api/get/message */
 app.get('/api/get/message', function(req, res) {
   id.checkId(db, url, req, res);
   res = message.getMessage(db, url, req, res)
+  id.setTableStatus("madera_message", true)
 })
 
 /* /api/get/product */
 app.get('/api/get/product', function(req, res) {
   id.checkId(db, url, req, res);
   res = product.getProduct(db, url, req, res)
+  id.setTableStatus("madera_product", true)
 })
 
 /* /api/get/project */
 app.get('/api/get/project', function(req, res) {
   id.checkId(db, url, req, res);
   res = project.getProject(db, url, req, res)
+  id.setTableStatus("madera_project", true)
 })
 
 /* /api/get/promotion_cat */
 app.get('/api/get/promotion_cat', function(req, res) {
   id.checkId(db, url, req, res);
   res = promotionCat.getPromotionCat(db, url, req, res)
+  id.setTableStatus("madera_promotion_cat", true)
 })
 
 /* /api/get/promotion_comp */
 app.get('/api/get/promotion_comp', function(req, res) {
   id.checkId(db, url, req, res);
   res = promotionComp.getPromotionComp(db, url, req, res)
+  id.setTableStatus("madera_promotion_comp", true)
 })
 
 /* /api/get/quotation */
 app.get('/api/get/quotation', function(req, res) {
   id.checkId(db, url, req, res);
   res = quotation.getQuotation(db, url, req, res)
+  id.setTableStatus("madera_quotation", true)
 })
 
 /* /api/get/role */
 app.get('/api/get/role', function(req, res) {
   id.checkId(db, url, req, res);
   res = role.getRole(db, url, req, res)
+  id.setTableStatus("madera_role", true)
 })
 
 /* /api/get/shop */
 app.get('/api/get/shop', function(req, res) {
   id.checkId(db, url, req, res);
   res = shop.getShop(db, url, req, res)
+  id.setTableStatus("madera_shop", true)
 })
 
 /* /api/get/stock */
 app.get('/api/get/stock', function(req, res) {
   id.checkId(db, url, req, res);
   res = stock.getStock(db, url, req, res)
+  id.setTableStatus("madera_stock", true)
 })
 
 /* /api/get/supplier */
 app.get('/api/get/supplier', function(req, res) {
   id.checkId(db, url, req, res);
   res = supplier.getSupplier(db, url, req, res)
+  id.setTableStatus("madera_supplier", true)
 })
 
 /* /api/get/attribut */
 app.get('/api/get/attribut', function(req, res) {
   id.checkId(db, url, req, res);
   res = attribut.getAttribut(db, url, req, res)
+  id.setTableStatus("madera_attribut", true)
 })
 
 /* if bad answer not found 404 */

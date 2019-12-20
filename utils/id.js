@@ -83,14 +83,29 @@ class Id{
     logger.info("tableUpdated: '" + tableUpdated + "'")
 
     for (let itemId in this.idJsonObject){
-      if (itemId != this.getId()){
-        logger.debug("itemId not refresh: '" + itemId + "'");
-        logger.debug("idJsonObject[itemId][tableUpdated]: '" + this.idJsonObject[itemId]["madera_address_client"] + "'");
+      logger.debug("for id: '" + itemId + "'");
+      if (status == false){ // for update status when: post
+        logger.debug("in post mode");
+        if (itemId != this.getId()){
+          /* define false for sync */
+          this.idJsonObject[itemId][tableUpdated] = status;
+          logger.debug("set to: '" + this.idJsonObject[itemId][tableUpdated] + "'");
 
-        /* define false for sync */
-        this.idJsonObject[itemId][tableUpdated] = status;
+          this.writeIdJson();
+        } else {
+          logger.debug("no change: '" + this.idJsonObject[itemId][tableUpdated] + "'");
+        }
+      } else { // for update status when: get
+        logger.debug("in get mode");
+        if (itemId == this.getId()){
+          /* define false for sync */
+          this.idJsonObject[itemId][tableUpdated] = status;
+          logger.debug("set to: '" + this.idJsonObject[itemId][tableUpdated] + "'");
 
-        this.writeIdJson();
+          this.writeIdJson();
+        } else {
+          logger.debug("no change: '" + this.idJsonObject[itemId][tableUpdated] + "'");
+        }
       }
     }
 
