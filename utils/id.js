@@ -78,7 +78,7 @@ class Id{
     return this.idNumber;
   }
 
-  setTableStatus(tableUpdated){
+  setTableStatus(tableUpdated, status){
     logger.info("setTableStatus for this id: '" + this.getId() + "'")
     logger.info("tableUpdated: '" + tableUpdated + "'")
 
@@ -88,7 +88,7 @@ class Id{
         logger.debug("idJsonObject[itemId][tableUpdated]: '" + this.idJsonObject[itemId]["madera_address_client"] + "'");
 
         /* define false for sync */
-        this.idJsonObject[itemId][tableUpdated] = false;
+        this.idJsonObject[itemId][tableUpdated] = status;
 
         this.writeIdJson();
       }

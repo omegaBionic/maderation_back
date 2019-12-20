@@ -116,7 +116,7 @@ module.exports = {
                   break;
               }
               /* update id.json for sync */
-              id.setTableStatus(jsonBody[item].table)
+              id.setTableStatus(jsonBody[item].table, false)
             }
             res.setHeader('Content-Type', 'application/json');
             res.status(200).send({
