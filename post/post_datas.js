@@ -12,8 +12,18 @@ const removeItem = (items, i) =>
   items.slice(0, i-1).concat(items.slice(i, items.length))
 
 module.exports = {
-  /* this function is used for get users */
+  /**
+  * postDatas module.
+  * @module post/postDatas
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @param {object} id - requester's id.
+  * @return {json} return sended value and status.
+  */
   postDatas: function (db, url, req, res, id) {
+    /* The title of the book. */
     logger.debug("request received into getusers function.");
 
     /* parse datas */
