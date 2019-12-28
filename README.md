@@ -120,6 +120,9 @@ $ npm install mocha
 $ ./runTests.sh 
 ```
 
+## generate documentation
+$ npm install -g jsdoc
+
 ## ansible configuration
 ```bash
 
