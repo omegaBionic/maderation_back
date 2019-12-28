@@ -1,8 +1,27 @@
 # How to install maderation_back
 
+## commands
+### POST
+### ADD/DELETE:
+syntax :
+```bash
+curl -d '{"0": {"status":"add", "table": "madera_user", "values": {"phoneNumber":{"S":"666666666"},"isActive":{"BOOL":true},"lastname":{"S":"je suis un lastname"},"password":{"S":"coucou"},"firstname":{"S":":d"},"idShop":{"N":"9"},"mail":{"S":"test@aaaaa.net"},"username":{"S":"test69"}}}, "1": {"status":"add", "table":"madera_address_client", "values": {"city":{"S":"dijon"},"idAddressClient":{"S":"1"},"country":{"S":"france"},"postalCode":{"N":"21000"},"street":{"S":"mirande"}}}}' -X POST "http://madera-api.maderation.net:8080/api/post/post_datas?key=993b06009dce6a9962esecf49801d32e&id=user"
+```
 
-# commands
-### get :
+add exemple :
+```bash
+{"0": {"status":"add", "table":"madera_address_client", "values": {"city":{"S":"dijon"},"idAddressClient":{"S":"5"},"country":{"S":"france"},"postalCode":{"N":"21000"},"street":{"S":"mirande"}}}}
+```
+
+delete exemple :
+```bash
+{"0": {"status":"delete", "table":"madera_address_client", "values": {"city":{"S":"dijon"},"idAddressClient":{"S":"5"},"country":{"S":"france"},"postalCode":{"N":"21000"},"street":{"S":"mirande"}}}}
+```
+
+### GET
+get sync
+http://madera-api.maderation.net:8080/api/get/sync?key=03f1ce90995780a5c6fe80eacccfb080&id=69
+
 get status
 http://madera-api.maderation.net:8080/api/get/status?key=179616f1a4cecab2a7eab481b84d076c
 
@@ -11,6 +30,9 @@ http://madera-api.maderation.net:8080/api/get/user?key=83c2c07ea1251a1a39ec46d52
 
 get client
 http://madera-api.maderation.net:8080/api/get/client?key=9f15cb387f77c3284bd1bdc364a21eb7
+
+get attribut
+http://madera-api.maderation.net:8080/api/get/attribut?key=86ad7be9d92e838132c9c182554531e9&id=69
 
 get address_client
 http://madera-api.maderation.net:8080/api/get/address_client?key=28e60ed41c0a59a442cade866bff3a97
