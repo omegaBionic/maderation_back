@@ -122,6 +122,7 @@ $ ./runTests.sh
 
 ## generate documentation
 $ npm install -g jsdoc
+$ ./runServer.sh
 
 ## ansible configuration
 ```bash
