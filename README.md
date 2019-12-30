@@ -122,6 +122,8 @@ $ ./runTests.sh
 
 ## generate documentation
 $ npm install -g jsdoc
+$ npm install -g markdown-pdf
+$ npm install -g jsdoc-to-markdown
 $ ./runServer.sh
 
 ## ansible configuration
