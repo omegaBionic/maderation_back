@@ -39,7 +39,7 @@ let post = require('./post/post_datas');
   id.checkId(db, url, req, res); // check id connexion for sync
   res = post.postDatas(db, url, req, res, id) // use postDatas module
   })
- * @returns {Object} Returns the value of x for the equation.
+ * @returns {Object} Json.
   */
 
 /* MODULS AND SETUP */
