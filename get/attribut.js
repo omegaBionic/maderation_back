@@ -4,7 +4,15 @@ let Logger = require('../utils/logger')
 let logger = new Logger("attribut", "debug")
 
 module.exports = {
-  /* this function is used for get attribut */
+  /**
+  * getAttribut module.
+  * @module get/attribut
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status.
+  */
   getAttribut : function (db, url, req, res){
     logger.debug("request received into getAttribut function.");
 

@@ -30,6 +30,18 @@ let attribut = require('./get/attribut');
 let post = require('./post/post_datas');
 
 
+  /**
+  * Use this index to manage the entire api.
+  * @module index
+ * @example <caption>Use this index like that:</caption>
+ * // "/api/post/post_datas"
+ * app.post('/api/post/post_datas', function(req, res) { // set the link
+  id.checkId(db, url, req, res); // check id connexion for sync
+  res = post.postDatas(db, url, req, res, id) // use postDatas module
+  })
+ * @returns {Object} Returns the value of x for the equation.
+  */
+
 /* MODULS AND SETUP */
 let express = require('express');
 let http = require('http');

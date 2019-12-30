@@ -4,7 +4,15 @@ let Logger = require('../utils/logger')
 let logger = new Logger("addressSupplier", "debug")
 
 module.exports = {
-  /* this function is used for get addressClient */
+  /**
+  * getAddressSupplier module.
+  * @module get/address_supplier
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status.
+  */
   getAddressSupplier : function (db, url, req, res){
     logger.debug("request received into getaddressClient function.");
 

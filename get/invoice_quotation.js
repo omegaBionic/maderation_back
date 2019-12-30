@@ -4,7 +4,15 @@ let Logger = require('../utils/logger')
 let logger = new Logger("invoiceQuotation", "debug")
 
 module.exports = {
-  /* this function is used for get invoiceQuotation */
+  /**
+  * getInvoiceQuotation module.
+  * @module get/invoice_quotation
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status.
+  */
   getInvoiceQuotation : function (db, url, req, res){
     logger.debug("request received into getinvoiceQuotation function.");
 

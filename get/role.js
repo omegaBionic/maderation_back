@@ -4,7 +4,15 @@ let Logger = require('../utils/logger')
 let logger = new Logger("role", "debug")
 
 module.exports = {
-  /* this function is used for get role */
+  /**
+  * getRole module.
+  * @module get/role
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status.
+  */
   getRole : function (db, url, req, res){
     logger.debug("request received into getrole function.");
 

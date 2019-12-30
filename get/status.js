@@ -12,7 +12,15 @@ let isAllowed = false;
 const secureKey = '179616f1a4cecab2a7eab481b84d076c';
 
 module.exports = {
-  /* check if database is ready */
+  /**
+  * getStatus module.
+  * @module get/status
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status.
+  */
   getStatus : function (db, url, req, res){
     logger.debug("check api status");
 

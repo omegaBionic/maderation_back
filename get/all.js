@@ -6,7 +6,15 @@ let Logger = require('../utils/logger')
 let logger = new Logger("all", "debug")
 
 module.exports = {
-  /* this function is for get all madera tables */
+  /**
+  * getAll module.
+  * @module get/all
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status, this module is not working.
+  */
   getAll : function (db, url, req, res){
     logger.debug("request received into getAll function");
 

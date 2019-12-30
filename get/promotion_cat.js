@@ -4,7 +4,15 @@ let Logger = require('../utils/logger')
 let logger = new Logger("promotionCat", "debug")
 
 module.exports = {
-  /* this function is used for get promotionCat */
+  /**
+  * getPromotionCat module.
+  * @module get/promotion_cat
+  * @param {object} db - db from dynamodb format.
+  * @param {object} url - url from request.
+  * @param {object} req - request full.
+  * @param {object} res - result from request.
+  * @return {json} return sended value and status.
+  */
   getPromotionCat : function (db, url, req, res){
     logger.debug("request received into getpromotionCat function.");
 
