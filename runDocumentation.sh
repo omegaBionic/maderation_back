@@ -1,4 +1,5 @@
 #!/bin/bash
 
-jsdoc --verbose post/post_datas.js
+rm -rf out/
+jsdoc --verbose --recurse post get index.js
 echo "Documentation in: out directory."
