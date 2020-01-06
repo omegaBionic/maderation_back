@@ -121,6 +121,23 @@ module.exports = {
 	                  });
                   }
                   break;
+                  case 'modify':
+                    /* modify datas into dynamodb */
+                    logger.debug("into modify case");
+                    paramsdb = {
+                      TableName: jsonBody[item].table,
+                      Item: jsonBody[item].values
+                    };
+                    db.putItem(paramsdb, function (err, data) {
+                      if (err) {
+                        logger.info(err, err.stack);
+                        logger.error("err: '" + err.stack + "' - '" + err.stack + "'");
+                        //res.json(data);
+                      } else {
+                        logger.info("datas pushed into database");
+                      }
+                    });
+                  break;
                 default:
                   logger.info("bad status request into json");
                   break;
