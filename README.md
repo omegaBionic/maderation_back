@@ -8,14 +8,19 @@ syntax :
 curl -d '{"0": {"status":"add", "table": "madera_user", "values": {"phoneNumber":{"S":"666666666"},"isActive":{"BOOL":true},"lastname":{"S":"je suis un lastname"},"password":{"S":"coucou"},"firstname":{"S":":d"},"idShop":{"N":"9"},"mail":{"S":"test@aaaaa.net"},"username":{"S":"test69"}}}, "1": {"status":"add", "table":"madera_address_client", "values": {"city":{"S":"dijon"},"idAddressClient":{"S":"1"},"country":{"S":"france"},"postalCode":{"N":"21000"},"street":{"S":"mirande"}}}}' -X POST "http://madera-api.maderation.net:8080/api/post/post_datas?key=993b06009dce6a9962esecf49801d32e&id=user"
 ```
 
-add exemple :
+add exemple:
 ```bash
 {"0": {"status":"add", "table":"madera_address_client", "values": {"city":{"S":"dijon"},"idAddressClient":{"S":"5"},"country":{"S":"france"},"postalCode":{"N":"21000"},"street":{"S":"mirande"}}}}
 ```
 
-delete exemple :
+delete exemple:
 ```bash
 {"0": {"status":"delete", "table":"madera_address_client", "values": {"city":{"S":"dijon"},"idAddressClient":{"S":"5"},"country":{"S":"france"},"postalCode":{"N":"21000"},"street":{"S":"mirande"}}}}
+```
+
+modify exemple:
+```bash
+{"0": {"status":"modify", "table":"madera_address_client", "values": {"city":{"S":"sagy"},"idAddressClient":{"S":"1"},"country":{"S":"france"},"postalCode":{"N":"71580"},"street":{"S":"route du test"}}}}
 ```
 
 ### GET
