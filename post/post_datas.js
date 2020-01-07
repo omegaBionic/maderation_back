@@ -24,7 +24,7 @@ module.exports = {
   */
   postDatas: function (db, url, req, res, id) {
     /* The title of the book. */
-    logger.debug("request received into getusers function.");
+    logger.debug("request received into postMail function.");
 
     /* parse datas */
     logger.debug("parse datas.");
