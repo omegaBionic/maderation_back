@@ -23,6 +23,13 @@ modify exemple:
 {"0": {"status":"modify", "table":"madera_address_client", "values": {"city":{"S":"sagy"},"idAddressClient":{"S":"1"},"country":{"S":"france"},"postalCode":{"N":"71580"},"street":{"S":"route du test"}}}}
 ```
 
+Mail:
+```bash
+http://madera-api.maderation.net:8080/api/post/post_mail?key=bdd5c890be92b02115330360cd77c194&id=test0
+send mail:
+{"ToAddresses":"admin@maderation.net", "CcAddresses":"admin@maderation.net", "Body1":"This is body 1 :D", "Body2":"This is body2 :)", "Subject":"Test email"}
+```
+
 ### GET
 get sync
 http://madera-api.maderation.net:8080/api/get/sync?key=03f1ce90995780a5c6fe80eacccfb080&id=69
