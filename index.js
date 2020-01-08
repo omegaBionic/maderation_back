@@ -27,7 +27,8 @@ let stock = require('./get/stock');
 let supplier = require('./get/supplier');
 let attribut = require('./get/attribut');
 
-let post = require('./post/post_datas');
+let postDatas = require('./post/post_datas');
+let postMail = require('./post/post_mail');
 
 
   /**
@@ -61,7 +62,13 @@ let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 /* /api/post/post_datas */
 app.post('/api/post/post_datas', function(req, res) {
   id.checkId(db, url, req, res);
-  res = post.postDatas(db, url, req, res, id)
+  res = postDatas.postDatas(db, url, req, res, id)
+})
+
+/* /api/post/post_mail */
+app.post('/api/post/post_mail', function(req, res) {
+  id.checkId(db, url, req, res);
+  res = postMail.postMail(url, req, res, id)
 })
 
 /* GET */
