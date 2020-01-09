@@ -123,7 +123,7 @@ module.exports = {
               });
             }).catch(
               function(err) {
-                logger.info("err for send email.");
+                logger.error("err for send email.");
                 res.setHeader('Content-Type', 'application/json');
                 res.status(500).send({
                   status: 500,
