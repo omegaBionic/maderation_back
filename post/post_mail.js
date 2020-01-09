@@ -42,39 +42,70 @@ module.exports = {
             // Set the region 
             AWS.config.update({region: 'eu-west-1'});
 
-            // Create sendEmail params 
-            var paramsMail = {
-              Destination: { /* required */
-                CcAddresses: [
-                  jsonBody.CcAddresses,
-                  /* more items */
-                ],
-                ToAddresses: [
-                  jsonBody.ToAddresses,
-                  /* more items */
-                ]
-              },
-              Message: { /* required */
-              Body: { /* required */
-                Html: {
-                Charset: "UTF-8",
-                Data: jsonBody.Body1
+            // Create sendEmail params
+            if (jsonBody.CcAddresses == ""){ // if no CcAddresses
+              var paramsMail = {
+                Destination: { /* required */
+                  ToAddresses: [
+                    jsonBody.ToAddresses,
+                    /* more items */
+                  ]
                 },
-                Text: {
-                Charset: "UTF-8",
-                Data: jsonBody.Body2
+                Message: { /* required */
+                Body: { /* required */
+                  Html: {
+                  Charset: "UTF-8",
+                  Data: jsonBody.Body1
+                  },
+                  Text: {
+                  Charset: "UTF-8",
+                  Data: jsonBody.Body2
+                  }
+                },
+                Subject: {
+                  Charset: 'UTF-8',
+                  Data: jsonBody.Subject
                 }
-              },
-              Subject: {
-                Charset: 'UTF-8',
-                Data: jsonBody.Subject
-              }
-              },
-            Source: 'admin@maderation.net', /* required */
-            ReplyToAddresses: [
-              'admin@maderation.net',
-            ],
-          };
+                },
+              Source: 'admin@maderation.net', /* required */
+              ReplyToAddresses: [
+                'admin@maderation.net',
+              ],
+            };
+            } else {
+              var paramsMail = {
+                Destination: { /* required */
+                  CcAddresses: [
+                    jsonBody.CcAddresses,
+                    /* more items */
+                  ],
+                  ToAddresses: [
+                    jsonBody.ToAddresses,
+                    /* more items */
+                  ]
+                },
+                Message: { /* required */
+                Body: { /* required */
+                  Html: {
+                  Charset: "UTF-8",
+                  Data: jsonBody.Body1
+                  },
+                  Text: {
+                  Charset: "UTF-8",
+                  Data: jsonBody.Body2
+                  }
+                },
+                Subject: {
+                  Charset: 'UTF-8',
+                  Data: jsonBody.Subject
+                }
+                },
+              Source: 'admin@maderation.net', /* required */
+              ReplyToAddresses: [
+                'admin@maderation.net',
+              ],
+            };
+          }
           logger.debug("paramsMail: '" + JSON.stringify(paramsMail) + "'");
           
           // Create the promise and SES service object
