@@ -5,6 +5,9 @@ let json = require('../utils/json')
 let Logger = require('../utils/logger')
 let logger = new Logger("postPicture", "debug")
 
+/* bocker name */
+let bucket = "maderationpictures";
+
 module.exports = {
   /**
   * postPicture module.
@@ -25,10 +28,6 @@ module.exports = {
     let params = querystring.parse(url.parse(req.url).query);
     logger.debug("key: " + params['key']);
 
-    const BUCKET = "maderationpictures";
-    let localImage = "./badlogic.jpg";
-    let imageRemoteName = "badlogic.jpg";
-
     /* check key and check datas */
     if ('key' in params) {
       if (params['key'] == "c038zoo1a9b638f8e89d897119a1b7bb") {
@@ -36,32 +35,49 @@ module.exports = {
         let body = '';
         req.on('data', chunk => {
           body += chunk.toString(); // convert Buffer to string
-          logger.debug("body: '" + body + "'")
 
           if (json.isJson(body)) { // check data integrity
             logger.debug("inputJson is in json format");
             /* post mail */
+            // body to json object
             let jsonBody = JSON.parse(body)
+            console.log(`jsonBody: '`, jsonBody, "'")
+
             // Load the AWS SDK for Node.js
             var AWS = require('aws-sdk');
             // Set the region 
             AWS.config.update({region: 'eu-west-1'});
             
+            /* transform picture for push */
+            let base64Image = jsonBody.data.split(';base64,').pop();
+            var img = Buffer.from(base64Image, 'base64');
+
             var s3 = new AWS.S3()
-            
             s3.putObject({
-              Bucket: BUCKET,
-              Body: fs.readFileSync(localImage),
-              Key: imageRemoteName
+              Bucket: bucket,
+              Body: img,
+              Key: jsonBody.pictureName
             })
               .promise()
               .then(response => {
-                console.log(`done! - `, response)
+                logger.info("done: '" + response + "'")
                 console.log(
-                  `The URL is ${s3.getSignedUrl('getObject', { Bucket: BUCKET, Key: imageRemoteName })}`
+                  `The URL is ${s3.getSignedUrl('getObject', { Bucket: bucket, Key: jsonBody.pictureName })}`
                 )
+                logger.info("picture sent.");
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).send({
+                  status: 200,
+                  datas: 'Ok: picture sent'
+                });
               })
               .catch(err => {
+                logger.error("err for send picture.");
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).send({
+                  status: 500,
+                  datas: 'Error: err for send picture'
+                });
                 console.log('failed:', err)
               })
           } else {
