@@ -115,16 +115,21 @@ module.exports = {
           sendPromise.then(
             function(data) {
               console.log(data.MessageId);
+              logger.info("email sent.");
+              res.setHeader('Content-Type', 'application/json');
+              res.status(200).send({
+                status: 200,
+                datas: 'Ok: email sent'
+              });
             }).catch(
               function(err) {
+                logger.info("err for send email.");
+                res.setHeader('Content-Type', 'application/json');
+                res.status(500).send({
+                  status: 500,
+                  datas: 'Error: err for send email'
+                });
               console.error(err, err.stack);
-            });
-
-            logger.info("email sent.");
-            res.setHeader('Content-Type', 'application/json');
-            res.status(200).send({
-              status: 200,
-              datas: 'Ok: email sent'
             });
           } else {
             logger.info("inputJson is not in json format");
