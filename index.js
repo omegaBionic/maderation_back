@@ -29,6 +29,7 @@ let attribut = require('./get/attribut');
 
 let postDatas = require('./post/post_datas');
 let postMail = require('./post/post_mail');
+let postPicture = require('./post/post_picture');
 
 
   /**
@@ -63,6 +64,11 @@ let db = new AWS.DynamoDB({'region': 'eu-west-3'});
 app.post('/api/post/post_datas', function(req, res) {
   id.checkId(db, url, req, res);
   res = postDatas.postDatas(db, url, req, res, id)
+})
+
+/* /api/post/post_picture */
+app.post('/api/post/post_picture', function(req, res) {
+  res = postPicture.postPicture(url, req, res)
 })
 
 /* /api/post/post_mail */
