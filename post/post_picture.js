@@ -35,8 +35,7 @@ module.exports = {
         /* get and parse body to jsonBody, wait all paquets */
         let body = '';
         req.on('data', chunk => {
-          //body += chunk.toString(); // convert Buffer to string
-          body.push(chunk);
+          body += chunk.toString(); // convert Buffer to string
         });
 
         /* data treatment */
