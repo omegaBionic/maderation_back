@@ -19,7 +19,7 @@ module.exports = {
   * @param {object} id - requester's id.
   * @return {json} return sended value and status.
   */
-  postPicture: function (url, req, res, id) {
+  postPicture: function (url, req, res) {
     /* The title of the book. */
     logger.debug("request received into postPicture function.");
 
@@ -31,17 +31,23 @@ module.exports = {
     /* check key and check datas */
     if ('key' in params) {
       if (params['key'] == "c038zoo1a9b638f8e89d897119a1b7bb") {
-        /* get and parse body to jsonBody */
+
+        /* get and parse body to jsonBody, wait all paquets */
         let body = '';
         req.on('data', chunk => {
-          body += chunk.toString(); // convert Buffer to string
+          //body += chunk.toString(); // convert Buffer to string
+          body.push(chunk);
+        });
+
+        /* data treatment */
+        req.on('end', chunk => {
+          console.log(`body: '`, body, "'")
 
           if (json.isJson(body)) { // check data integrity
             logger.debug("inputJson is in json format");
-            /* post mail */
+
             // body to json object
             let jsonBody = JSON.parse(body)
-            console.log(`jsonBody: '`, jsonBody, "'")
 
             // Load the AWS SDK for Node.js
             var AWS = require('aws-sdk');
