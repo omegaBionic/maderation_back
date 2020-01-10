@@ -5,7 +5,7 @@ let json = require('../utils/json')
 let Logger = require('../utils/logger')
 let logger = new Logger("postPicture", "debug")
 
-/* bocker name */
+/* bucket name */
 let bucket = "maderationpictures";
 
 module.exports = {
