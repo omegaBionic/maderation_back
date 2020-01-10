@@ -39,7 +39,7 @@ let postPicture = require('./post/post_picture');
  * // "/api/post/post_datas"
  * app.post('/api/post/post_datas', function(req, res) { // set the link
   id.checkId(db, url, req, res); // check id connexion for sync
-  res = post.postDatas(db, url, req, res, id) // use postDatas module
+  res = post.postDatas(db, url, req, res) // use postDatas module
   })
  * @returns {Object} Json.
   */
