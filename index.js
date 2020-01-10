@@ -26,6 +26,7 @@ let shop = require('./get/shop');
 let stock = require('./get/stock');
 let supplier = require('./get/supplier');
 let attribut = require('./get/attribut');
+let picture = require('./get/picture');
 
 let postDatas = require('./post/post_datas');
 let postMail = require('./post/post_mail');
@@ -229,8 +230,14 @@ app.get('/api/get/attribut', function(req, res) {
   id.setTableStatus("madera_attribut", true)
 })
 
+/* /api/get/picture */
+app.get('/api/get/picture', function(req, res) {
+  res = picture.getPicture(url, req, res)
+})
+
 /* if bad answer not found 404 */
 .use(function(req, res, next){
+  logger.info("request not found")
   res.setHeader('Content-Type', 'application/json');
   res.status(404).send({
     status: 404,
