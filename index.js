@@ -26,11 +26,11 @@ let shop = require('./get/shop');
 let stock = require('./get/stock');
 let supplier = require('./get/supplier');
 let attribut = require('./get/attribut');
-let picture = require('./get/picture');
+let file = require('./get/file');
 
 let postDatas = require('./post/post_datas');
 let postMail = require('./post/post_mail');
-let postPicture = require('./post/post_picture');
+let postFile = require('./post/post_file');
 
 
   /**
@@ -67,9 +67,9 @@ app.post('/api/post/post_datas', function(req, res) {
   res = postDatas.postDatas(db, url, req, res, id)
 })
 
-/* /api/post/post_picture */
-app.post('/api/post/post_picture', function(req, res) {
-  res = postPicture.postPicture(url, req, res)
+/* /api/post/post_file */
+app.post('/api/post/post_file', function(req, res) {
+  res = postFile.postFile(url, req, res)
 })
 
 /* /api/post/post_mail */
@@ -230,9 +230,9 @@ app.get('/api/get/attribut', function(req, res) {
   id.setTableStatus("madera_attribut", true)
 })
 
-/* /api/get/picture */
-app.get('/api/get/picture', function(req, res) {
-  res = picture.getPicture(url, req, res)
+/* /api/get/file */
+app.get('/api/get/file', function(req, res) {
+  res = file.getFile(url, req, res)
 })
 
 /* if bad answer not found 404 */

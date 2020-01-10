@@ -3,15 +3,15 @@ let url = require('url');
 let fs = require('fs')
 let json = require('../utils/json')
 let Logger = require('../utils/logger')
-let logger = new Logger("postPicture", "debug")
+let logger = new Logger("postFile", "debug")
 
 /* bucket name */
 let bucket = "maderationpictures";
 
 module.exports = {
   /**
-  * postPicture module.
-  * @module post/postPicture
+  * postFile module.
+  * @module post/postFile
   * @param {object} db - db from dynamodb format.
   * @param {object} url - url from request.
   * @param {object} req - request full.
@@ -19,9 +19,9 @@ module.exports = {
   * @param {object} id - requester's id.
   * @return {json} return sended value and status.
   */
-  postPicture: function (url, req, res) {
+  postFile: function (url, req, res) {
     /* The title of the book. */
-    logger.debug("request received into postPicture function.");
+    logger.debug("request received into postFile function.");
 
     /* parse datas */
     logger.debug("parse datas.");
@@ -53,7 +53,7 @@ module.exports = {
             // Set the region 
             AWS.config.update({region: 'eu-west-1'});
             
-            /* transform picture for push */
+            /* transform file for push */
             let base64Image = jsonBody.data.split(';base64,').pop();
             var img = Buffer.from(base64Image, 'base64');
 
@@ -61,27 +61,27 @@ module.exports = {
             s3.putObject({
               Bucket: bucket,
               Body: img,
-              Key: jsonBody.pictureName
+              Key: jsonBody.fileName
             })
               .promise()
               .then(response => {
                 logger.info("done: '" + response + "'")
                 console.log(
-                  `The URL is ${s3.getSignedUrl('getObject', { Bucket: bucket, Key: jsonBody.pictureName })}`
+                  `The URL is ${s3.getSignedUrl('getObject', { Bucket: bucket, Key: jsonBody.fileName })}`
                 )
-                logger.info("picture sent.");
+                logger.info("file sent.");
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).send({
                   status: 200,
-                  datas: 'Ok: picture sent'
+                  datas: 'Ok: file sent'
                 });
               })
               .catch(err => {
-                logger.error("err for send picture.");
+                logger.error("err for send file.");
                 res.setHeader('Content-Type', 'application/json');
                 res.status(500).send({
                   status: 500,
-                  datas: 'Error: err for send picture'
+                  datas: 'Error: err for send file'
                 });
                 console.log('failed:', err)
               })
