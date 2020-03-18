@@ -4,6 +4,7 @@ let Logger = require('../utils/logger')
 let logger = new Logger("users", "debug")
 
 module.exports = {
+
   /**
   * getUser module.
   * @module get/user
@@ -19,6 +20,7 @@ module.exports = {
     /* parse datas */
     logger.debug("parse datas.");
     let params = querystring.parse(url.parse(req.url).query);
+
     logger.debug("key: " + params['key']);
 
     /* check users and password */

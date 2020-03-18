@@ -1,5 +1,4 @@
 /* CLASS CONFIGURATION: "debug" / "info" / "error" / "fatal" */
-// TODO Destructor for close log file
 const fs = require('fs')
 const mkdirp = require('mkdirp');
 
