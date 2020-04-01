@@ -7,7 +7,6 @@ SERVER_PORT=8085
 /usr/bin/node index.js ${SERVER_PORT}&
 /bin/echo "Server is running."
 
-
 # launch tests
 /bin/echo "Mocha test in running..."
 ./node_modules/.bin/mocha --recursive tests/
